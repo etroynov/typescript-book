@@ -1,26 +1,27 @@
-## Closure
+## Замыкания
 
-The best thing that JavaScript ever got was closures. A function in JavaScript has access to any variables defined in the outer scope. Closures are best explained with examples:
-
+Лучшая вещь, которую когда-либо получал JavaScript - это замыкания. Функции в JavaScript имеют доступ ко всем переменным объявленным объявленным во внешней области видимости. 
+Замыкания лучше всего объяснить на примерах:
 ```ts
 function outerFunction(arg) {
     var variableInOuterFunction = arg;
 
     function bar() {
-        console.log(variableInOuterFunction); // Access a variable from the outer scope
-    }
-
-    // Call the local function to demonstrate that it has access to arg
+        console.log(variableInOuterFunction); // Доступ к переменной из внешней области видимости
+    }   
+    // Вызов локальной функции демонстрирует, что она имеет доступ к arg 
     bar();
 }
 
-outerFunction("hello closure"); // logs hello closure!
+outerFunction("hello closure"); // выведет hello closure!
 ```
 
-You can see that the inner function has access to a variable (variableInOuterFunction) from the outer scope. The variables in the outer function have been closed by (or bound in) the inner function. Hence the term **closure**. The concept in itself is simple enough and pretty intuitive.
+Вы можете видеть что внутренняя функция имеет доступ к переменной (variableInOuterFunction) из вышестоящей области видимости.
+Переменные во внешней функции были замкнуты (или связаны) с внутренней функцией. Отсюда и термин  **замыкание**.
+Сама концепция достаточно проста и довольно интуитивна.
 
-Now the awesome part: The inner function can access the variables from the outer scope *even after the outer function has returned*. This is because the variables are still bound in the inner function and not dependent on the outer function. Again let's look at an example:
-
+Теперь самая крутая часть: Внутренняя функция имеет доступ к переменным из вышестоящей области видимости *даже после того когда вышестоящая функция ее вернула*.
+Все это потому, что переменные все еще связаны во внутренней функции и не зависят от внешней функции. Еще раз взглянем на пример:
 ```ts
 function outerFunction(arg) {
     var variableInOuterFunction = arg;
@@ -31,12 +32,12 @@ function outerFunction(arg) {
 
 var innerFunction = outerFunction("hello closure!");
 
-// Note the outerFunction has returned
-innerFunction(); // logs hello closure!
+// Обратите внимание, что externalFunction возвращена
+innerFunction(); // выведет hello closure!
 ```
 
-### Reason why it's awesome
-It allows you to compose objects easily e.g. the revealing module pattern:
+### Почему это круто
+Это позволяет нам объявлять объекты, в паттерне Revealing Module (паттерн выявления модулей, он же — паттерн открытый модуль, он же — паттерн раскрывающийся модуль)
 
 ```ts
 function createCounter() {
@@ -54,13 +55,13 @@ counter.increment();
 console.log(counter.getVal()); // 2
 ```
 
-At a high level it is also what makes something like Node.js possible (don't worry if it doesn't click in your brain right now. It will eventually 🌹):
+На высоком уровне это позволяет делать Node.js что-то вроде этого (Не беспокойтесь, если у вас в мозгу пока не щелкнуло. Это только 🌹):
 
 ```ts
-// Pseudo code to explain the concept
+// Псевдокод для объяснения концепции
 server.on(function handler(req, res) {
     loadData(req.id).then(function(data) {
-        // the `res` has been closed over and is available
+        // `res` был замкнут и доступен
         res.send(data);
     })
 });
