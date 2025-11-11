@@ -45,7 +45,7 @@
 * [Корейский](https://github.com/radlohead/typescript-book)
 * [Французкий](https://github.com/HachemiH/typescript-book)
 
-## Электронная версия
+## Электронная версия книги
 Вы так же можете скачать книгу по следующим ссылкам:
 * [EPUB для iPad, iPhone, Mac](https://www.gitbook.com/download/epub/book/basarat/typescript)
 * [PDF для Windows и других](https://www.gitbook.com/download/pdf/book/basarat/typescript)
